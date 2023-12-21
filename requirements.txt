@@ -1,0 +1,13 @@
+ipykernel
+huggingface_hub[cli]
+
+transformers
+tensorflow
+torch
+datasets
+soundfile
+librosa
+moviepy 
+torchaudio
+numpy
+evaluate
