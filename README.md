@@ -11,3 +11,11 @@ https://youtu.be/K_S9Pso91qU?si=_Og0OCoQoZTHnzU4&t=833
 
 
 On the mac i am using, i need to install ffmpeg with brew. SO make sure you have brew also
+
+
+Noter:
+Hvordan fungerer den der WER egentligt?
+Hvor mange timers video har vi brug for?
+Hvilket udsnit af politikere?
+Hvordan definerer vi seres dialekt (hvis det er det vi vil)?
+Hvad vil vi egentligt?

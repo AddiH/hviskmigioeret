@@ -12,3 +12,5 @@ torchaudio
 numpy
 evaluate
 jiwer
+bs4
+pandas
