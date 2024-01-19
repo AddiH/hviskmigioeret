@@ -7,3 +7,51 @@ Slice df så der er 20 tilfældige mænd og kvinder med content i 2 min
     Fjern alt der er under 30 sek.
     Tag de første 29 sek (måske 20 sec inden i videosnip + 29 sek)
 Trim videoerne og gem stykkerne i mapper med politikerens stemme. 
+
+
+
+def old_extract_timestamps(req: Response, video_start_clock: str) -> pd.DataFrame:
+
+    soup = BeautifulSoup(req.text, 'html.parser') # Parse the HTML as a string
+
+    script_tag = soup.find('script', text=re.compile('SpeachItem')) # Find the script tag containing the timestamps
+    speach_items = re.findall(r'new SpeachItem\(.*\)', script_tag.string) # Extract all instances of SpeachItem
+    speach_items = [re.sub(r'new SpeachItem', '', item) for item in speach_items] # Remove 'new SpeachItem'
+
+    # loop over speach_items and extract the timestamps
+    start_times = []
+    end_times = []
+    start_times_clock = []
+    end_times_clock = []
+    id = []
+
+    video_start_clock_datetime = datetime.strptime(video_start_clock, '%H:%M:%S') # time first speach starts
+
+    for item in speach_items:
+        speach_start_clock = item[19:27]
+        speach_end_clock = item[41:49]
+
+        # Convert to datetime
+        speach_start_clock_datetime = datetime.strptime(speach_start_clock, '%H:%M:%S')
+        speach_end_clock_datetime = datetime.strptime(speach_end_clock, '%H:%M:%S')
+
+        # Calculate the timedelta (difference) from the video start
+        speach_start_timestamp = (speach_start_clock_datetime - video_start_clock_datetime).total_seconds()
+        speach_end_timestamp = (speach_end_clock_datetime - video_start_clock_datetime).total_seconds()
+
+        # Append the original times and calculated seconds
+        start_times_clock.append(speach_start_clock)
+        end_times_clock.append(speach_end_clock)
+        start_times.append(speach_start_timestamp)
+        end_times.append(speach_end_timestamp)
+        id.append(item[58:-2])
+
+    # Create DataFrame
+    time_stamps = pd.DataFrame({
+        'Start': start_times,
+        'End': end_times,
+        'StartClock': start_times_clock,
+        'EndClock': end_times_clock,
+        'ID': id
+    })
+    return time_stamps

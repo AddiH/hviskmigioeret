@@ -162,4 +162,7 @@ cython_debug/
 # AddiH add
 audio_env/
 .DS_Store
-data/
+data/raw_videos/*
+!data/raw_videos/.gitkeep
+data/transcripts/*
+!data/transcripts/.gitkeep
