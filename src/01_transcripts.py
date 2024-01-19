@@ -29,7 +29,7 @@ for index, row in tqdm(df.iterrows()):
     timestamps = get_timestamps(durations, start_time) # get timestamps
     df = pd.merge(transcripts, timestamps, on='ID') # merge dataframes
     df = df.drop(columns=['ID']) # drop ID column
-    df['nr'] = nr # add column with nr
+    df['video_id'] = nr # add column with nr
     df = remove_titles(df, politicians) # remove titles from names
 
     save_name = f'data/transcripts/{nr}_transcript.csv'

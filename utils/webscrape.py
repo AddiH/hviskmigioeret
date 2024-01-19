@@ -129,22 +129,22 @@ def get_timestamps(df, initial_start_time):
     - df (DataFrame): The DataFrame containing the 'duration' column.
 
     Returns:
-    - DataFrame: A pandas DataFrame containing columns for 'start' and 'end'.
+    - DataFrame: A pandas DataFrame containing columns for 'start_sec' and 'end_sec'.
     '''
     
-    # Calculate the cumulative sum of 'Duration' for the 'end' column and add the initial start time
-    df['end'] = df['duration'].cumsum() + initial_start_time
+    # Calculate the cumulative sum of 'Duration' for the 'end_sec' column and add the initial start time
+    df['end_sec'] = df['duration'].cumsum() + initial_start_time
 
-    # Shift the 'end' column to create the 'start' column, and initialize the first value with the initial start time
-    df['start'] = df['end'].shift(1).fillna(initial_start_time)
+    # Shift the 'end_sec' column to create the 'start_sec' column, and initialize the first value with the initial start time
+    df['start_sec'] = df['end_sec'].shift(1).fillna(initial_start_time)
 
-    # Convert 'start' and 'end' columns to integer if necessary
-    df['start'] = df['start'].astype(int)
-    df['end'] = df['end'].astype(int)
+    # Convert 'start_sec' and 'end_sec' columns to integer if necessary
+    df['start_sec'] = df['start_sec'].astype(int)
+    df['end_sec'] = df['end_sec'].astype(int)
 
-    # Apply the conversion to 'start' and 'end' and create new columns
-    df['start_min'] = df['start'].apply(to_min_sec)
-    df['end_min'] = df['end'].apply(to_min_sec)
+    # Apply the conversion to 'start_sec' and 'end_sec' and create new columns
+    df['start_min'] = df['start_sec'].apply(to_min_sec)
+    df['end_min'] = df['end_sec'].apply(to_min_sec)
 
     return df
 

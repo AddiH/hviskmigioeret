@@ -166,3 +166,4 @@ data/raw_videos/*
 !data/raw_videos/.gitkeep
 data/transcripts/*
 !data/transcripts/.gitkeep
+data/politicians/*
