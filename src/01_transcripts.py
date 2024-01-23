@@ -5,6 +5,7 @@ import requests # downloading webpages
 from time import sleep # pausing the loop
 from random import randint # random number generator
 from tqdm import tqdm # progress bar
+from bs4 import BeautifulSoup
 sys.path.append(os.path.join('utils'))
 from webscrape import *
 
@@ -14,11 +15,17 @@ politicians = pd.read_csv('data/politicians.csv') # for removing titles
 
 # loop over rows in df
 for index, row in tqdm(df.iterrows()):
+
     # get values from row
     nr = row['nr']
     url = row['url']
     min = row['min']
     sec = row['sec']
+
+    save_name = f'data/transcripts/{nr}_transcript.csv'
+    # if file already exists, skip
+    if os.path.isfile(save_name):
+        continue
 
     req = requests.get(url) # download webpage
     sleep(randint(1,5)) # pause loop for 1-5 seconds
@@ -32,5 +39,4 @@ for index, row in tqdm(df.iterrows()):
     df['video_id'] = nr # add column with nr
     df = remove_titles(df, politicians) # remove titles from names
 
-    save_name = f'data/transcripts/{nr}_transcript.csv'
     df.to_csv(save_name, index=False) # save dataframe

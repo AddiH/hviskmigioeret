@@ -66,7 +66,58 @@ def extract_transcript(req: Response) -> pd.DataFrame:
     # Return DataFrame
     return df
 
-def extract_duration(req: Response) -> pd.DataFrame:
+
+def extract_duration(req):
+    '''
+    Extracts duration of speeches from a given Response object, skipping the last item.
+    
+    Parameters:
+    - req (Response): The Response object obtained from a web request.
+
+    Returns:
+    - pd.DataFrame: A pandas DataFrame containing columns for 'duration', 'start_clock', and 'ID', excluding the last speech.
+    '''
+
+    soup = BeautifulSoup(req.text, 'html.parser')  # Parse the HTML as a string
+
+    script_tag = soup.find('script', text=re.compile('SpeachItem'))  # Find the script tag containing the timestamps
+    speach_items = re.findall(r'new SpeachItem\(.*\)', script_tag.string)  # Extract all instances of SpeachItem
+    speach_items = [re.sub(r'new SpeachItem', '', item) for item in speach_items]  # Remove 'new SpeachItem'
+
+    # Initialize lists for data collection
+    id = []
+    duration = []
+    start_clock = []
+
+    # Loop over speach_items, excluding the last one for duration calculation
+    for index in range(len(speach_items) - 1):  # Stop before the last item
+        # Get start clock for current and next speech
+        current_start_clock = speach_items[index][19:27]
+        next_start_clock = speach_items[index + 1][19:27]
+
+        # Convert to datetime
+        current_start_clock_datetime = datetime.strptime(current_start_clock, '%H:%M:%S')
+        next_start_clock_datetime = datetime.strptime(next_start_clock, '%H:%M:%S')
+
+        # Calculate the timedelta (difference) for duration
+        seconds = (next_start_clock_datetime - current_start_clock_datetime).total_seconds()
+
+        # Append duration and other details to lists
+        duration.append(seconds)
+        id.append(speach_items[index][58:-2])
+        start_clock.append(current_start_clock)
+
+    # Create DataFrame
+    durations = pd.DataFrame({
+        'duration': duration,
+        'start_clock': start_clock,
+        'ID': id
+    })
+
+    return durations
+
+
+def old_extract_duration(req: Response) -> pd.DataFrame:
     '''
     Extracts duration of speaches from a given Response object.
     
@@ -86,6 +137,8 @@ def extract_duration(req: Response) -> pd.DataFrame:
     # loop over speach_items and extract the timestamps
     id = []
     duration = []
+    start_clock = []
+    end_clock = []
 
     for item in speach_items:
         # Get start and end clock
@@ -102,10 +155,14 @@ def extract_duration(req: Response) -> pd.DataFrame:
         # Append duration and ID to lists
         duration.append(seconds)
         id.append(item[58:-2])
+        start_clock.append(speach_start_clock)
+        end_clock.append(speach_end_clock)
 
     # Create DataFrame
     durations = pd.DataFrame({
         'duration': duration,
+        'start_clock': start_clock,
+        'end_clock': end_clock,
         'ID': id
     })
 
@@ -113,13 +170,23 @@ def extract_duration(req: Response) -> pd.DataFrame:
     durations = durations.iloc[1:]
     return durations
 
-def to_min_sec(seconds: int) -> str:
-    '''
-    Converts seconds to minutes and seconds.
-    '''
-    minutes = seconds // 60
+def to_hour_min_sec(seconds: int) -> str:
+    """
+    Converts seconds to hours, minutes, and seconds.
+
+    Parameters:
+    - seconds (int): The total number of seconds.
+
+    Returns:
+    - str: A string representation in the format "hours:minutes:seconds".
+    
+    Hours will be 0 if the total time is less than an hour.
+    """
+    hours = seconds // 3600
+    minutes = (seconds % 3600) // 60
     sec = seconds % 60
-    return f"{minutes}:{sec:02d}"
+    return f"{hours}:{minutes:02d}:{sec:02d}"
+
 
 def get_timestamps(df, initial_start_time):
     '''
@@ -143,8 +210,8 @@ def get_timestamps(df, initial_start_time):
     df['end_sec'] = df['end_sec'].astype(int)
 
     # Apply the conversion to 'start_sec' and 'end_sec' and create new columns
-    df['start_min'] = df['start_sec'].apply(to_min_sec)
-    df['end_min'] = df['end_sec'].apply(to_min_sec)
+    df['start_min'] = df['start_sec'].apply(to_hour_min_sec)
+    df['end_min'] = df['end_sec'].apply(to_hour_min_sec)
 
     return df
 

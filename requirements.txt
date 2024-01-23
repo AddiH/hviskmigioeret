@@ -15,4 +15,4 @@ jiwer
 bs4
 pandas
 tqdm
-glob
+#glob

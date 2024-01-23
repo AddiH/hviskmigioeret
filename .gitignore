@@ -167,3 +167,6 @@ data/raw_videos/*
 data/transcripts/*
 !data/transcripts/.gitkeep
 data/politicians/*
+!data/politicians/.gitkeep
+*/trash/*
+*/archive/*
