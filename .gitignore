@@ -170,3 +170,5 @@ data/politicians/*
 !data/politicians/.gitkeep
 */trash/*
 */archive/*
+data/audio/raw/*
+!data/audio/raw/.gitkeep
