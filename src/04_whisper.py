@@ -19,10 +19,10 @@ def main(model_name):
     # set up paths
     load_model = 'openai/' + model_name
     save_path_model = 'models/' + model_name
-    full_save_path_model = '../data/' + save_path_model
+    full_save_path_model = 'data/' + save_path_model
     if not os.path.exists(full_save_path_model): # check that the save folder exists
         os.makedirs(full_save_path_model) # if not, create it
-    paths = folder_walker('../data/audio/resampled') # the audio files to be transcribed
+    paths = folder_walker('data/audio/resampled') # the audio files to be transcribed
 
     # load model and processor
     processor = WhisperProcessor.from_pretrained(load_model)
@@ -61,7 +61,7 @@ def main(model_name):
             data.append([content, variable_path]) # Append both the content and the file path to the data list
 
     df = pd.DataFrame(data, columns=[model_name, 'file']) # Create a DataFrame with the data
-    df.to_csv('../data/models/' + model_name + '.csv', index=False) # Save the DataFrame as a CSV file
+    df.to_csv('data/models/' + model_name + '.csv', index=False) # Save the DataFrame as a CSV file
     
     for path in paths:
         os.remove(path) # Delete all the .txt files that only held a single string
