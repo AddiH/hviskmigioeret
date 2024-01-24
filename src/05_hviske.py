@@ -7,6 +7,8 @@ from transformers import AutoProcessor, AutoModelForSpeechSeq2Seq
 import argparse
 sys.path.append(os.path.join('utils'))
 from audio_preprocess import folder_walker
+import torch
+from transformers import pipeline
 
 def input_parse():
     parser = argparse.ArgumentParser() # initialise parser
@@ -24,9 +26,14 @@ def main(model_name):
         os.makedirs(full_save_path_model) # if not, create it
     paths = folder_walker('data/audio/resampled') # the audio files to be transcribed
 
-    # load model and processor
-    processor = AutoProcessor.from_pretrained(load_model)
-    model = AutoModelForSpeechSeq2Seq.from_pretrained(load_model)
+    # setup pipeline
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    pipe = pipeline(
+        "automatic-speech-recognition",
+        model=load_model,
+        chunk_length_s=30,
+        device=device
+    )
 
     # TRANCRIBE
     for path in tqdm(paths):
@@ -40,13 +47,11 @@ def main(model_name):
         
         waveform, sample_rate = torchaudio.load(path) # load in audio
         waveform_np = waveform.squeeze().numpy() # convert to numpy array
-        input_features = processor(waveform_np, sampling_rate=sample_rate, return_tensors="pt").input_features # load data into processor
-        predicted_ids = model.generate(input_features) # generate token ids from the model
-        result = processor.batch_decode(predicted_ids, skip_special_tokens=True) # decode token ids to text (remove special tokens)
+        result = pipe({"raw": waveform_np, "sampling_rate": sample_rate}, batch_size=8)["text"]
 
         # save the string to a file
         with open(save_path, 'w') as f:
-            f.write(result[0])
+            f.write(result)
 
     # CLEAN UP - delete the single files and save the data as a csv
     paths = folder_walker(full_save_path_model) # get the paths to the .txt files
