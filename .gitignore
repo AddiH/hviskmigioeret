@@ -174,3 +174,5 @@ data/audio/raw/*
 !data/audio/raw/.gitkeep
 data/audio/resampled/*
 !data/audio/resampled/.gitkeep
+data/models/hviske
+data/models/whisper-*
