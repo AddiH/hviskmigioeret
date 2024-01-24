@@ -23,21 +23,36 @@ Hvad vil vi egentligt?
 ## Setup
 - try it on ucloud
 
-### Manual labor
-Unfortunately with the time constraints of this exam, it was not possible to fully automate the process of pulling videos and transcripts from folketingets website. This means that you will have to do some manual labor to get the data.
-#### Choose and download videos
-You will need to download the videos you want to use. Folketinget publishes all their meetings on their website https://www.ft.dk/da/aktuelt/tv-fra-folketinget/tidligere-moeder
-Be aware that it can take a couple of days before the transcripts are available.
-Download the files and save them in data/raw_videos. Give them a sensible name, I have chosen the number of the meeting. The name should correspond with the name in the urls.csv file.
-#### Create urls.csv
-You will need to manually create the file data/urls.csv. This file should contain
-nr, url, min, sec
-    The nr should correspond with the name of the video file. 
-    The url should be the url to the video on folketingets website. 
-    The min and sec should be the time in the video where the FIRST speaker starts speaking. **This is NOT speaker 0!** This is the biggest hassle with this dataset. The first part of the video is not transcibed, as it is  technically not a speach, but just the formand of the folketinget opening the meeting, by reading the agenda. Pay a lot of attention to this part. You might need to return here and fiddle with the numbers, once you realise the videaos have been sliced wrong.
-#### Create politicians.csv
-If you are using this repository around the time it was created (january 2024) you can omit this step, as the politicians within the folketing most likely hasn't changed. If you are making a new one, just make sure it has a gender and name column. I pulled the data from wikipedia, which is why there are additional columns. https://da.wikipedia.org/wiki/Folketingsmedlemmer_valgt_i_2022 
+## Manual Setup
 
+Due to the constraints of this project's timeline, the process of obtaining videos and transcripts from the Folketinget's website couldn't be fully automated. As such, there are a few manual steps you'll need to undertake to prepare the data for use.
+
+### Choose and Download Videos
+
+1. **Select Videos**: Visit the [Folketinget's archive of past meetings](https://www.ft.dk/da/aktuelt/tv-fra-folketinget/tidligere-moeder) to choose the videos you wish to analyze. Note that transcripts may take a few days to become available after a meeting has occurred.
+   
+2. **Download and Organize Videos**: Download the selected video files and save them in the `data/raw_videos` directory. It's recommended to name the files using the meeting number for easy reference. Ensure the video file names correspond with the entries in the `urls.csv` file for consistency.
+
+### Create `urls.csv`
+
+Manually create a `urls.csv` file within the `data` directory. This file should follow the format:
+
+```
+nr, url, min, sec
+```
+
+- **nr**: Corresponds to the video file name.
+- **url**: The direct URL to the video on the Folketinget website.
+- **min** and **sec**: Indicate the timestamp (minutes and seconds) where the first speaker starts. Note that this refers to the first official speaker (speaker 1, NOT speaker 0 in the official transcript), not preliminary proceedings like the meeting's opening. Accurately determining this timestamp is crucial for correctly aligning the data; adjustments may be needed upon reviewing the cut videos.
+
+### Create `politicians.csv`
+
+This step may be optional if using the repository close to its creation date (January 2024), assuming no significant changes have occurred in the Folketinget's composition. If needed:
+
+1. **Structure**: Ensure the file includes at least `gender` and `name` columns.
+2. **Source Data**: Initial data was sourced from [Wikipedia's list of Folketingsmedlemmer elected in 2022](https://da.wikipedia.org/wiki/Folketingsmedlemmer_valgt_i_2022). Additional columns present are due to this origin, and not necessary for the project.
+
+(project developed on mac/tested on ucloud check your paths etc)
 
 ## Purpose of the scripts in /src
 **01_transcripts.py**
