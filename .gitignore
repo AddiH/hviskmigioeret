@@ -178,3 +178,5 @@ data/models/hviske
 data/models/whisper-*
 local_requirements.txt
 ORIGINAL_sample_clips.csv
+GitHub.Copilot.Vsix.1.149.0.0.vsix
+git_setup.sh
