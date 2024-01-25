@@ -1,29 +1,20 @@
-# Hvisk mig i øret
-Exam for NLP, Cognitive Science Masters
+# Danish Folketing Audio Transcription Toolkit
 
-https://www.youtube.com/watch?v=L_R-9w-75YQ
+## Project Introduction
 
-https://youtu.be/K_S9Pso91qU?si=_Og0OCoQoZTHnzU4&t=833 
+This repository is developed as part of an academic exam project focused on creating a new dataset of transcribed Danish audio. It addresses a common challenge in Automatic Speech Recognition (ASR) research: testing models on diverse and previously unseen data. Our solution involves collecting and transcribing audio from the Danish Parliament (Folketinget), a rich source of linguistic material that is underrepresented in current ASR datasets.
 
+## Objective
 
-1) Have a huggingface account and token ready
-2) Make sure you have access to https://huggingface.co/mhenrichsen/hviske (you must request access)
+The primary goal is to document the process of assembling a unique dataset from the Folketinget's proceedings. While the repository serves as a comprehensive guide to our approach, users should anticipate adjusting and tinkering with the code to tailor the dataset generation to their specific needs. This project underscores the importance of expanding the availability of Danish language resources for ASR and other language processing applications.
 
+## Usage and Adaptation
 
-On the mac i am using, i need to install ffmpeg with brew. SO make sure you have brew also
+Given the exploratory nature of this work, the code and methodologies presented are not flawless. Users are encouraged to view this repository as a starting point for developing their own Folketing audio dataset. Through community engagement and iterative refinement, we hope this toolkit will evolve, enhancing its utility and accuracy for future ASR research and development.
 
-
-Noter:
-Hvordan fungerer den der WER egentligt?
-Hvor mange timers video har vi brug for?
-Hvilket udsnit af politikere?
-Hvordan definerer vi seres dialekt (hvis det er det vi vil)?
-Hvad vil vi egentligt?
 
 ## Setup
-- try it on ucloud
 
-- run setup env
 
 ## Manual Setup
 
@@ -53,6 +44,12 @@ This step may be optional if using the repository close to its creation date (Ja
 
 1. **Structure**: Ensure the file includes at least `gender` and `name` columns.
 2. **Source Data**: Initial data was sourced from [Wikipedia's list of Folketingsmedlemmer elected in 2022](https://da.wikipedia.org/wiki/Folketingsmedlemmer_valgt_i_2022). Additional columns present are due to this origin, and not necessary for the project.
+
+
+
+
+
+
 
 (project developed on mac/tested on ucloud check your paths etc)
 
