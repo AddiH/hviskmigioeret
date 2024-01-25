@@ -80,3 +80,5 @@ link til deling og rettigheder på FT hjemmeside
 
 
 we've chosen to only transcribe a sample (20 women and 20 men speaking for <120 sec). You can easily take another sample and extract the soundfiles, or even transcribe everything, by giving 03 another sample.
+
+Perhaps it is better to first pull out sound? Then clip? Could sound be downloaded directly.

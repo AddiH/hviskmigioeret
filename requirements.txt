@@ -6,3 +6,4 @@ torch==2.1.2
 torchaudio==2.1.2
 tqdm==4.66.1
 transformers==4.36.2
+soundfile==0.12.1
