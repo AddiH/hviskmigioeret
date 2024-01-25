@@ -176,3 +176,4 @@ data/audio/resampled/*
 !data/audio/resampled/.gitkeep
 data/models/hviske
 data/models/whisper-*
+local_requirements.txt

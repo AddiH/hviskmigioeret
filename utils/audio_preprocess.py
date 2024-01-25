@@ -4,7 +4,6 @@ import torchaudio
 import torchaudio.transforms as T
 import torch
 from moviepy.editor import VideoFileClip
-from tqdm import tqdm
 
 def extract_audio_from_video(video_file_path, audio_file_path):
     video = VideoFileClip(video_file_path)

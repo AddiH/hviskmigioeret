@@ -62,3 +62,11 @@ This step may be optional if using the repository close to its creation date (Ja
     <- transcripts/file.csv     Csv file with transcript for each URL
 
 Downloads the transcripts from folketingets website. The transcripts contain timestamps as well as the name of the speaker
+
+
+
+This is what you can do to improve this project:
+The videos are saved in a folder called politicians. We found this useful for the alignment process. That way we could confirm the speaker and get clues to how we might have to fiddle with the timestamps. You could easily incorporate a line of code that deletes the videos, thus freeing up space on your computer.
+
+combine transcripts and audiofiles into one database
+While it worked just fine for our purposes to have the transcripts and audiofiles in separate folders, it might be useful to combine them into one database. Again, this is something you can easily do with a few lines of code.
