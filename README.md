@@ -23,6 +23,8 @@ Hvad vil vi egentligt?
 ## Setup
 - try it on ucloud
 
+- run setup env
+
 ## Manual Setup
 
 Due to the constraints of this project's timeline, the process of obtaining videos and transcripts from the Folketinget's website couldn't be fully automated. As such, there are a few manual steps you'll need to undertake to prepare the data for use.
@@ -70,3 +72,11 @@ The videos are saved in a folder called politicians. We found this useful for th
 
 combine transcripts and audiofiles into one database
 While it worked just fine for our purposes to have the transcripts and audiofiles in separate folders, it might be useful to combine them into one database. Again, this is something you can easily do with a few lines of code.
+
+
+
+link til deling og rettigheder på FT hjemmeside
+
+
+
+we've chosen to only transcribe a sample (20 women and 20 men speaking for <120 sec). You can easily take another sample and extract the soundfiles, or even transcribe everything, by giving 03 another sample.

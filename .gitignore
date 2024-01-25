@@ -177,3 +177,4 @@ data/audio/resampled/*
 data/models/hviske
 data/models/whisper-*
 local_requirements.txt
+ORIGINAL_sample_clips.csv
