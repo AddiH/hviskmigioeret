@@ -2,11 +2,11 @@
 
 ## Project Introduction
 
-This repository is developed as part of an academic exam project focused on creating a new dataset of transcribed Danish audio. It addresses a common challenge in Automatic Speech Recognition (ASR) research: testing models on diverse and previously unseen data. Our solution involves collecting and transcribing audio from the Danish Parliament (Folketinget), a rich source of linguistic material that is underrepresented in current ASR datasets.
+This repository is developed as part of an academic exam project focused on creating a new dataset of transcribed Danish audio and evaluating various Automatic Speech Recognition (ASR) models. It addresses a common challenge in ASR research: testing models on diverse and previously unseen data. Our solution involves collecting and transcribing audio from the Danish Parliament (Folketinget), a rich source of linguistic material that is, to our knowledge, not included in current ASR datasets.
 
 ## Objective
 
-The primary goal is to document the process of assembling a unique dataset from the Folketinget's proceedings. While the repository serves as a comprehensive guide to our approach, users should anticipate adjusting and tinkering with the code to tailor the dataset generation to their specific needs. This project underscores the importance of expanding the availability of Danish language resources for ASR and other language processing applications.
+The primary goal is to document the process of assembling a unique dataset from the Folketinget's proceedings, and then evaluate two main ASR models. While the repository serves as a comprehensive guide to our approach, users should anticipate adjusting and tinkering with the code to tailor the dataset generation to their specific needs. This project underscores the importance of expanding the availability of Danish language resources for ASR and other language processing applications.
 
 ## Usage and Adaptation
 
@@ -14,6 +14,26 @@ Given the exploratory nature of this work, the code and methodologies presented 
 
 
 ## Setup
+This project was initially developed on an Apple M1 computer and subsequently deployed on the university's [Ucloud](cloud.sdu.dk) computing resources, which run on an Ubuntu 22.04.3 LTS machine. Due to differences in operating systems, Windows users might encounter issues related to file path conventions (e.g., the use of \ instead of /) among others. We recommend using Unix-like environments (Linux or macOS) for smoother operation.
+To setup the needed enviroment on a Ucloud machine, you can run:
+
+```bash
+bash setup_env.sh
+```
+
+#### `setup_env.sh` Script Overview
+
+The `setup_env.sh` script automates the setup process with the following steps:
+
+1. Updates the package lists for upgrades and new package installations.
+2. Installs `ffmpeg`, a crucial tool for processing video files.
+3. Creates a Python virtual environment named `audio_env`.
+4. Activates the virtual environment.
+5. Upgrades `pip` to the latest version.
+6. Installs the project's Python dependencies listed in `requirements.txt`.
+
+
+
 
 
 ## Manual Setup
