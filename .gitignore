@@ -183,3 +183,4 @@ git_setup.sh
 src/02_take_sample_improved.py
 utils/transcript_sample.py
 *.xlsx
+src/wer
