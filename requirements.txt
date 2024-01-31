@@ -9,3 +9,4 @@ transformers==4.36.2
 soundfile==0.12.1
 matplotlib
 seaborn
+whisper_normalizer
