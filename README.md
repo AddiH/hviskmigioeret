@@ -14,7 +14,7 @@ Given the exploratory nature of this work, the code and methodologies presented 
 
 
 ## Setup
-This project was initially developed on an Apple M1 computer and subsequently deployed on the university's [Ucloud](cloud.sdu.dk) computing resources, which run on an Ubuntu 22.04.3 LTS machine. Due to differences in operating systems, Windows users might encounter issues related to file path conventions (e.g., the use of \ instead of /) among others. We recommend using Unix-like environments (Linux or macOS) for smoother operation.
+This project was initially developed on an Apple M1 computer (python 3.11.6) and subsequently deployed on the university's [Ucloud](cloud.sdu.dk) computing resources (python 3.10.12), which run on an Ubuntu 22.04.3 LTS machine. Due to differences in operating systems, Windows users might encounter issues related to file path conventions (e.g., the use of \ instead of /) among others. We recommend using Unix-like environments (Linux or macOS) for smoother operation.
 To setup the needed enviroment on a Ucloud machine, you can run:
 
 ```bash
