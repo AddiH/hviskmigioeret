@@ -89,7 +89,6 @@ To run the `whisper.py` script with a specific model, use the `--model_name` fla
 python whisper.py --model_name whisper-medium
 ```
 - The model name should match one of the available models in the Whisper framework. Please refer to the Whisper documentation for a list of available models.
-To refine and organize your notes into a cohesive final section for the README file, I suggest restructuring the content to clearly outline potential improvements and alternatives for the project. Here's a revised version:
 
 
 ## Suggestions for Enhancing the Project
