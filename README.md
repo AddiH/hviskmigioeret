@@ -70,64 +70,53 @@ This step may be optional if using the repository close to its creation date (Ja
 The functions written for this project are available in the utils folder. Below you can see the purpose of each of the scripts in the src/ folder. You can run them in succession to replicate our project, or you can pick and choose the ones you need for your own project. 
 
 
-**01_transcripts.py**
+#### Overview of Scripts in `/src`
+The `/src` folder contains scripts essential for replicating our project or for use in similar projects. Here's a breakdown:
+
+| Script               | Description | Input | Output |
+|----------------------|-------------|-------|--------|
+| `01_transcripts.py`  | Downloads transcripts from Folketingets website, removing speaker titles. | `data/urls.csv` (URLs), `data/politicians.csv` (Politician names) | `transcripts/file.csv` (CSV of transcripts) |
+| `02_take_sample.py`  | Samples speeches, aiming for gender balance and sufficient audio length. | `data/transcripts/*.csv` (Transcripts), `data/politicians.csv` (Politician names) | `data/sample_clips.csv` (Subset of transcripts) |
+| `03_slice_videos.py` | Cuts videos based on timestamps, sorting them by speaker names. | `data/sample_clips.csv` (Transcripts subset) | `data/politicians/` (Folder with video clips) |
+| `04_audio.py`        | Extracts and processes audio from video clips. | `data/politicians/` (Video clips) | `data/audio` (Processed audio in .wav) |
+| `05_whisper.py` and `06_hviske.py` | Transcribes audio using a chosen model, saving interim results for efficiency. | `data/audio/resampled/*` (Resampled audio clips) | `data/models/` (Transcription DataFrame and audio file names) |
 
 
-Downloads the transcripts from Folketingets website. The transcripts contain timestamps as well as the name of the speaker, stripped of their title.
--> IN 
-    -> data/urls.csv             List of urls to the videos
-    -> data/politicians.csv      Names of politicians in Folketinget
-<- OUT 
-    <- transcripts/file.csv      Csv file with transcript for each URL
+To run the `whisper.py` script with a specific model, use the `--model_name` flag in the command line. This allows you to specify which model the script should use for transcription. If no model is specified, the default model used is `whisper-tiny`. 
+
+#### Example Command
+```bash
+python whisper.py --model_name whisper-medium
+```
+- The model name should match one of the available models in the Whisper framework. Please refer to the Whisper documentation for a list of available models.
+To refine and organize your notes into a cohesive final section for the README file, I suggest restructuring the content to clearly outline potential improvements and alternatives for the project. Here's a revised version:
 
 
-**02_take_sample.py**
+## Suggestions for Enhancing the Project
 
+This section outlines potential improvements and alternative approaches that could enhance the functionality and efficiency of the project. These suggestions are based on our experiences and are intended to guide you in customizing the project to better suit your needs.
 
-Samples of speeches from the transcripts. Tailored to our project, taking 20 female and 20 male speakers, collecting>120 seconds of audio for each speaker.
--> IN
-   -> data/transcripts/*.csv      The transcriptions collected in the previous step
-   -> data/politicians.csv         List of politicians, used to get even gender spread
-<- OUT
-   <- data/sample_clips.csv      Subset of transcriptions
+#### 1. Efficient Management of Video Files
+- **Current Approach**: Videos are saved in a folder named `politicians`, which aids in the alignment process by allowing easy confirmation of the speaker.
+- **Improvement Suggestion**: Implement a code snippet to automatically delete the video files after processing. This can help in freeing up storage space on your computer.
 
-**03_sclice_videos.py**
-Cuts the downloaded videos based on the timestamps in sample_clips.csv. Saves the videoclips under politicians/ in a folder with the speakers name
--> IN   
-   -> data/sample_clips.csv      Subset of transcriptions
-<- OUT
-   <- data/politicians/             Videoclips within this folder
+#### 2. Integrating Transcripts and Audio Files
+- **Current Approach**: Transcripts and audio files are stored in separate folders.
+- **Improvement Suggestion**: Combine these elements into a single database. This can be achieved with a few lines of code and may enhance data management and accessibility.
 
+#### 3. Flexible Sampling and Transcription
+- **Current Approach**: We transcribed a sample consisting of 20 women and 20 men, each speaking for less than 120 seconds.
+- **Improvement Suggestion**: 
+   - You can modify the sampling strategy to include a different set of speakers or a larger sample size.
+   - Consider transcribing the entire dataset, which can be done by adjusting the input for `03_slice_videos.py`.
 
-**04_audio.py**
-Extracts audio from video, then converts to mono and reasmple to 16000Hz
--> IN
-   -> data/politicians/             Videoclips within this folder
-<- OUT
-   <- data/audio                  Raw and resampled audioclips in .wav format
+#### 4. Revisiting the Processing Sequence
+- **Current Approach**: The project sequence involves pulling audio from video clips and then processing them.
+- **Improvement Suggestion**: 
+   - Explore the possibility of directly downloading or extracting sound from the source, which might streamline the process.
+   - Consider reversing the order of clipping and extracting audio to see if it enhances efficiency.
 
-**05_whisper.py and 06_hviske.py**
-Transcribes audiofile using the preferred model. from the terminal 05_whisper.py can by run by indicating the model with the flag --model_name, default is whisper-tiny.
-Each transcription is saved as a .txt file and only combined into one df once the transcriptions is completed. This is useful when running with less computing power, and it might be beneficial to interrupt the process, and still be able to contunie later.
--> IN
-   -> data/audio/resampled/*    resampled audioclips from 
-<- OUT
-   <- data/models/            df with the resulting trasncription, along with the filename of the audiofile. 
+#### Final Note
+This project was developed specifically for our academic examination. While it served our purposes well, there is significant scope for customization and improvement to adapt it to different project requirements. We encourage users to experiment with these suggestions and find what works best for their unique objectives.
 
-
-
-This is what you can do to improve this project:
-The videos are saved in a folder called politicians. We found this useful for the alignment process. That way we could confirm the speaker and get clues to how we might have to fiddle with the timestamps. You could easily incorporate a line of code that deletes the videos, thus freeing up space on your computer.
-
-combine transcripts and audiofiles into one database
-While it worked just fine for our purposes to have the transcripts and audiofiles in separate folders, it might be useful to combine them into one database. Again, this is something you can easily do with a few lines of code.
-
-
-
-link til deling og rettigheder på FT hjemmeside
-
-
-
-we've chosen to only transcribe a sample (20 women and 20 men speaking for <120 sec). You can easily take another sample and extract the soundfiles, or even transcribe everything, by giving 03 another sample.
-
-Perhaps it is better to first pull out sound? Then clip? Could sound be downloaded directly. Important to note that this was developed for our exam, there is probably a lot you can do to make it work better for your project.
+If you're unsure of whether you can use Folketingets data for your project, [you can have a look at the license here](https://www.ft.dk/da/aktuelt/tv-fra-folketinget/)
