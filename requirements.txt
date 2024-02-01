@@ -9,5 +9,4 @@ moviepy==1.0.3
 pandas==2.2.0
 Requests==2.31.0
 tqdm==4.66.1
-transformers==4.36.2
 soundfile==0.12.1
