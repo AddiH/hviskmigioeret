@@ -118,4 +118,4 @@ This section outlines potential improvements and alternative approaches that cou
 #### Final Note
 This project was developed specifically for our academic examination. While it served our purposes well, there is significant scope for customization and improvement to adapt it to different project requirements. We encourage users to experiment with these suggestions and find what works best for their unique objectives.
 
-If you're unsure of whether you can use Folketingets data for your project, [you can have a look at the license here](https://www.ft.dk/da/aktuelt/tv-fra-folketinget/)
+If you're unsure of whether you can use Folketingets data for your project, [you can have a look at the license here](https://www.ft.dk/da/aktuelt/tv-fra-folketinget/deling-og-rettigheder)
