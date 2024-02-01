@@ -53,7 +53,7 @@ nr, url, min, sec
 
 - **nr**: Corresponds to the video file name.
 - **url**: The direct URL to the video on the Folketinget website.
-- **min** and **sec**: Indicate the timestamp (minutes and seconds) where the first speaker starts. Note that this refers to the first official speaker (speaker 1, NOT speaker 0 in the official transcript), not preliminary proceedings like the meeting's opening. Accurately determining this timestamp is crucial for correctly aligning the data; adjustments may be needed upon reviewing the cut videos.
+- **min** and **sec**: Indicate the timestamp (minutes and seconds) where the first speaker starts. Note that this refers to the first official speaker, not preliminary proceedings like the meeting's opening. The first official speaker will be labeled as speaker 1 - NOT speaker 0 - in the official transcript. Accurately determining this timestamp is crucial for correctly aligning the data; adjustments may be needed upon reviewing the cut videos.
 
 #### Create `politicians.csv`
 
@@ -83,7 +83,7 @@ To run the `whisper.py` script with a specific model, use the `--model_name` fla
 
 #### Example Command
 ```bash
-python whisper.py --model_name whisper-medium
+python src/05_whisper.py --model_name whisper-medium
 ```
 - The model name should match one of the available models in the Whisper framework. Please refer to the Whisper documentation for a list of available models.
 
