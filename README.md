@@ -59,7 +59,7 @@ nr, url, min, sec
 
 This step may be optional if using the repository close to its creation date (January 2024), assuming no significant changes have occurred in the Folketinget's composition. If needed:
 
-1. **Structure**: Ensure the file includes at least the `name` columns, which is used to clear the transcripts of titles. 
+1. **Structure**: Ensure the file includes at least the `name` columns, which is used to clear the transcripts of titles. The `gender` column is used to gain a gender-balanced sample.
 2. **Source Data**: Initial data was sourced from [Wikipedia's list of Folketingsmedlemmer elected in 2022](https://da.wikipedia.org/wiki/Folketingsmedlemmer_valgt_i_2022). Additional columns present are due to this origin, and not necessary for the project.
 
 
