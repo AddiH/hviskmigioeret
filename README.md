@@ -2,7 +2,8 @@
 
 ## Project Introduction
 
-This repository is developed as part of an academic exam project focused on creating a new dataset of transcribed Danish audio and evaluating various Automatic Speech Recognition (ASR) models. It addresses a common challenge in ASR research: testing models on diverse and previously unseen data. Our solution involves collecting and transcribing audio from the Danish Parliament (Folketinget), a rich source of linguistic material that is, to our knowledge, not included in current ASR datasets.
+This repository is developed as part of an academic exam project focused on creating a new dataset of transcribed Danish audio and evaluating various Automatic Speech Recognition (ASR) models. It addresses a common challenge in ASR research: testing models on diverse and previously unseen data. Our solution involves collecting and transcribing audio from the Danish Parliament (Folketinget), a rich source of linguistic material that is, to our knowledge, not included in current ASR datasets. [If you choose to use any of the code in this repository, please ensure it is not in conflict with the license provided by Folketinget](https://www.ft.dk/da/aktuelt/tv-fra-folketinget/deling-og-rettigheder)
+
 
 ### Objective
 
