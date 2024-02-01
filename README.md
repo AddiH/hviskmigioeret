@@ -36,17 +36,17 @@ The `setup_env.sh` script automates the setup process with the following steps:
 
 
 
-## Manual Setup
+### Manual Setup
 
 Due to the constraints of this project's timeline, the process of obtaining videos and transcripts from the Folketinget's website couldn't be fully automated. As such, there are a few manual steps you'll need to undertake to prepare the data for use.
 
-### Choose and Download Videos
+#### Choose and Download Videos
 
 1. **Select Videos**: Visit the [Folketinget's archive of past meetings](https://www.ft.dk/da/aktuelt/tv-fra-folketinget/tidligere-moeder) to choose the videos you wish to analyze. Note that transcripts may take a few days to become available after a meeting has occurred.
    
 2. **Download and Organize Videos**: Download the selected video files and save them in the `data/raw_videos` directory. It's recommended to name the files using the meeting number for easy reference. Ensure the video file names correspond with the entries in the `urls.csv` file for consistency.
 
-### Create `urls.csv`
+#### Create `urls.csv`
 
 Manually create a `urls.csv` file within the `data` directory. This file should follow the format:
 
@@ -58,7 +58,7 @@ nr, url, min, sec
 - **url**: The direct URL to the video on the Folketinget website.
 - **min** and **sec**: Indicate the timestamp (minutes and seconds) where the first speaker starts. Note that this refers to the first official speaker (speaker 1, NOT speaker 0 in the official transcript), not preliminary proceedings like the meeting's opening. Accurately determining this timestamp is crucial for correctly aligning the data; adjustments may be needed upon reviewing the cut videos.
 
-### Create `politicians.csv`
+#### Create `politicians.csv`
 
 This step may be optional if using the repository close to its creation date (January 2024), assuming no significant changes have occurred in the Folketinget's composition. If needed:
 
@@ -68,7 +68,10 @@ This step may be optional if using the repository close to its creation date (Ja
 
 ## Purpose of the scripts in /src
 The functions written for this project are available in the utils folder. Below you can see the purpose of each of the scripts in the src/ folder. You can run them in succession to replicate our project, or you can pick and choose the ones you need for your own project. 
+
+
 **01_transcripts.py**
+
 
 Downloads the transcripts from Folketingets website. The transcripts contain timestamps as well as the name of the speaker, stripped of their title.
 -> IN 
@@ -77,13 +80,40 @@ Downloads the transcripts from Folketingets website. The transcripts contain tim
 <- OUT 
     <- transcripts/file.csv      Csv file with transcript for each URL
 
+
 **02_take_sample.py**
+
+
 Samples of speeches from the transcripts. Tailored to our project, taking 20 female and 20 male speakers, collecting>120 seconds of audio for each speaker.
 -> IN
    -> data/transcripts/*.csv      The transcriptions collected in the previous step
    -> data/politicians.csv         List of politicians, used to get even gender spread
 <- OUT
-   <- 
+   <- data/sample_clips.csv      Subset of transcriptions
+
+**03_sclice_videos.py**
+Cuts the downloaded videos based on the timestamps in sample_clips.csv. Saves the videoclips under politicians/ in a folder with the speakers name
+-> IN   
+   -> data/sample_clips.csv      Subset of transcriptions
+<- OUT
+   <- data/politicians/             Videoclips within this folder
+
+
+**04_audio.py**
+Extracts audio from video, then converts to mono and reasmple to 16000Hz
+-> IN
+   -> data/politicians/             Videoclips within this folder
+<- OUT
+   <- data/audio                  Raw and resampled audioclips in .wav format
+
+**05_whisper.py and 06_hviske.py**
+Transcribes audiofile using the preferred model. from the terminal 05_whisper.py can by run by indicating the model with the flag --model_name, default is whisper-tiny.
+Each transcription is saved as a .txt file and only combined into one df once the transcriptions is completed. This is useful when running with less computing power, and it might be beneficial to interrupt the process, and still be able to contunie later.
+-> IN
+   -> data/audio/resampled/*    resampled audioclips from 
+<- OUT
+   <- data/models/            df with the resulting trasncription, along with the filename of the audiofile. 
+
 
 
 This is what you can do to improve this project:
