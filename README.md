@@ -9,10 +9,6 @@ This repository is developed as part of an academic exam project focused on crea
 
 The primary goal is to document the process of assembling a unique dataset from the Folketinget's proceedings, and then evaluate two main ASR models. While the repository serves as a comprehensive guide to our approach, users should anticipate adjusting and tinkering with the code to tailor the dataset generation to their specific needs. This project underscores the importance of expanding the availability of Danish language resources for ASR and other language processing applications.
 
-### Usage and Adaptation
-
-Given the exploratory nature of this work, the code and methodologies presented are not flawless. Users are encouraged to view this repository as a starting point for developing their own Folketing audio dataset. Through community engagement and iterative refinement, we hope this toolkit will evolve, enhancing its utility and accuracy for future ASR research and development.
-
 
 ## Setup
 This project was initially developed on an Apple M1 computer (python 3.11.6) and subsequently deployed on the Aarhus University's [Ucloud](cloud.sdu.dk) computing resources (python 3.10.12), which run on an Ubuntu 22.04.3 LTS machine. Due to differences in operating systems, Windows users might encounter issues related to file path conventions (e.g., the use of \ instead of /) among others. We recommend using Unix-like environments (Linux or macOS) for smoother operation.
