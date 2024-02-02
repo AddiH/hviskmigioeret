@@ -164,7 +164,8 @@ audio_env/
 .DS_Store
 data/raw_videos/*
 !data/raw_videos/.gitkeep
-data/transcripts/*
+!data/transcripts/*
+data/transcripts/archive/
 !data/transcripts/.gitkeep
 data/politicians/*
 !data/politicians/.gitkeep
@@ -184,3 +185,4 @@ src/02_take_sample_improved.py
 utils/transcript_sample.py
 *.xlsx
 src/wer
+.DS_Store
