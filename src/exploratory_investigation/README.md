@@ -1,0 +1,2 @@
+# Analysis
+This folder contains our exploratory investigation of the data. We will be using this folder to store our analysis of the data. This will include any initial data exploration, data cleaning, and initial data visualization. 
